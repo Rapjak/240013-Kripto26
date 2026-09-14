@@ -45,7 +45,7 @@ apakah ingin melakukan operasi lain.
 
 ### Struktur Modular
 
-Sesuai prinsip modular, fungsi-fungsi dikelompokkan menjadi 3 kategori besar,
+Fungsi-fungsi dikelompokkan menjadi 3 kategori besar,
 masing-masing memiliki satu **fungsi pengatur** yang memanggil fungsi-fungsi
 kecil di dalamnya:
 
@@ -56,9 +56,8 @@ kecil di dalamnya:
 3. **OUTPUT** → semua fungsi `display_*()` dipanggil oleh satu fungsi pengatur:
    **`show_output(mode, result_data)`**
 
-Fungsi matematika inti (determinan, invers matriks mod, perkalian matriks, dll)
-dipisah tersendiri karena sifatnya murni komputasi dan dipakai bersama oleh
-semua mode (encrypt/decrypt/cari kunci)
+Fungsi matematika inti (determinan, invers matriks mod, perkalian matriks, dll.)
+dipisah tersendiri
 
 ---
 
@@ -130,14 +129,14 @@ Tersedia dua metode:
 
 ## 4. Daftar Error Handling
 
-### a. Validasi Menu & Pilihan
+### A. Validasi Menu & Pilihan
 | Situasi | Pesan / Perilaku |
 |---|---|
 | Pilihan menu bukan 1-4 | `[ERROR] Pilihan tidak dikenali! Harap masukkan angka 1, 2, 3, atau 4 sesuai menu di atas.` → user diminta memilih ulang |
 | Pilihan metode cari kunci bukan 1-2 | `[ERROR] Pilihan tidak dikenali! Harap masukkan angka 1 atau 2.` → diminta memilih ulang |
 | Jawaban y/n tidak dikenali | `[ERROR] Jawaban tidak dikenali! Harap masukkan 'y' untuk ya atau 'n' untuk tidak.` → diminta menjawab ulang |
 
-### b. Validasi Ukuran Matriks
+### B. Validasi Ukuran Matriks
 | Situasi | Pesan / Perilaku |
 |---|---|
 | Input bukan angka bulat | `[ERROR] Ukuran matriks harus berupa angka bulat! Silakan masukkan ulang.` |
@@ -145,14 +144,14 @@ Tersedia dua metode:
 | Ukuran > 8 (MAX_MATRIX_SIZE) | `[ERROR] Ukuran matriks terlalu besar (maksimal 8x8) karena akan sangat lambat dan boros memori untuk dihitung! Silakan masukkan ukuran yang lebih kecil.` |
 | Ukuran > 5 (tapi masih ≤ 8) | `[PERINGATAN] Ukuran matriks NxN cukup besar sehingga proses perhitungan determinan/invers bisa memakan waktu lebih lama dari biasanya.` (tetap dilanjutkan) |
 
-### c. Validasi Matriks Kunci
+### C. Validasi Matriks Kunci
 | Situasi | Pesan / Perilaku |
 |---|---|
 | Jumlah elemen pada satu baris ≠ n | `[ERROR] Jumlah angka pada baris ini harus tepat N buah! Silakan masukkan ulang baris ini.` |
 | Elemen bukan bilangan bulat | `[ERROR] Semua elemen matriks harus berupa angka bulat! Silakan masukkan ulang baris ini.` |
 | Matriks tidak invertible mod 26 (`gcd(det,26) != 1`) | `[ERROR] Matriks kunci tersebut TIDAK VALID untuk Hill Cipher karena determinannya tidak memiliki invers modulo 26 (gcd(determinan, 26) harus = 1). Silakan masukkan matriks kunci yang lain.` → seluruh matriks diminta diinput ulang |
 
-### d. Validasi Teks (Plaintext/Ciphertext)
+### D. Validasi Teks (Plaintext/Ciphertext)
 | Situasi | Pesan / Perilaku |
 |---|---|
 | Input kosong | `[ERROR] ... tidak boleh kosong! Silakan masukkan kembali.` |
@@ -160,12 +159,12 @@ Tersedia dua metode:
 | Input mengandung karakter selain huruf (spasi, angka, tanda baca) namun masih ada huruf | Karakter tersebut **otomatis dibuang**, lalu ditampilkan info: `[INFO] Karakter non-huruf pada input telah diabaikan. Teks yang diproses: ...` (tetap dilanjutkan, bukan error) |
 | Panjang teks kurang dari kebutuhan minimal (khusus fitur cari kunci, butuh ≥ n×n huruf) | `[ERROR] ... terlalu pendek! Dibutuhkan minimal N huruf. Silakan masukkan kembali.` |
 
-### e. Validasi Khusus Dekripsi
+### E. Validasi Khusus Dekripsi
 | Situasi | Pesan / Perilaku |
 |---|---|
 | Panjang ciphertext bukan kelipatan `n` | `[ERROR] Panjang ciphertext (X huruf) harus merupakan kelipatan dari ukuran matriks kunci (N)! Ciphertext hasil enkripsi Hill Cipher yang valid pasti sudah berupa kelipatan N. Silakan periksa kembali teks cipher Anda.` (ciphertext **tidak** di-padding otomatis, karena akan mengubah makna hasil dekripsi) |
 
-### f. Validasi Khusus Pencarian Kunci
+### F. Validasi Khusus Pencarian Kunci
 | Situasi | Pesan / Perilaku |
 |---|---|
 | Panjang plaintext & ciphertext yang diketahui tidak sama | `[ERROR] Panjang plaintext dan ciphertext yang diketahui harus SAMA (saling berpasangan huruf per huruf)! Silakan masukkan ulang keduanya.` |
@@ -174,7 +173,7 @@ Tersedia dua metode:
 | Blok plaintext yang dipilih (known-plaintext) tidak invertible mod 26, sehingga kunci gagal ditemukan | `[ERROR] Kunci Hill Cipher TIDAK ditemukan dari data plaintext/ciphertext yang diberikan. Kemungkinan penyebab: data pasangan plaintext-ciphertext tidak konsisten, atau blok plaintext yang dipakai tidak memiliki invers modulo 26. Silakan coba dengan pasangan data lain.` |
 | Brute force tidak menemukan kunci yang cocok sama sekali | Pesan error yang sama seperti di atas |
 
-### g. Penanganan Error Tak Terduga & Sistem
+### G. Penanganan Error Tak Terduga & Sistem
 | Situasi | Pesan / Perilaku |
 |---|---|
 | Terjadi exception tak terduga saat proses komputasi (mode 1/2/3) | `[ERROR] Terjadi kesalahan tak terduga saat memproses data (...). Silakan periksa kembali input Anda dan coba lagi.` → program **tidak crash**, kembali ke menu |
@@ -201,6 +200,9 @@ maupun brute force) akan menemukan kembali kunci **`[[7,6],[2,5]]`**.
 - Metode brute force pencarian kunci hanya didukung untuk matriks maksimal 2×2,
   karena kompleksitas waktu yang eksponensial (`26^(n×n)`) untuk ukuran yang lebih besar.
 
+---
+
+## 7. Screenshot Program
 
 Screenshoot running program:
 ![](images/1_malamini.png)
