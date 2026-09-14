@@ -223,23 +223,16 @@ maupun brute force) akan menemukan kembali kunci **`[[7,6],[2,5]]`**.
 
 
 Screenshoot running program:
-![](Hill-Cipher/images/1_malamini.png)
-![](Hill-Cipher/images/1_python.png)
-![](Hill-Cipher/images/2_malamini.png)
-![](Hill-Cipher/images/2_python.png)
-![](Hill-Cipher/images/3-2_magang.png)
-![](Hill-Cipher/images/3-2_malamini.png)
-![](Hill-Cipher/images/3-2_python.png)
-![](Hill-Cipher/images/menu4.png)
-
-
-
-
-
-
-
+![](images/1_malamini.png)
+![](images/1_python.png)
+![](images/2_malamini.png)
+![](images/2_python.png)
+![](images/3-2_magang.png)
+![](images/3-2_malamini.png)
+![](images/3-2_python.png)
+![](images/menu4.png)
 
 Error Handling:
-![](Hill-Cipher/images/3-1_malamini.png)
-![](Hill-Cipher/images/3-1_magang.png)
-![](Hill-Cipher/images/error_handling_inputan.png)
+![](images/3-1_malamini.png)
+![](images/3-1_magang.png)
+![](images/error_handling_inputan.png)
