@@ -179,7 +179,7 @@ Tersedia dua metode:
 |---|---|
 | Terjadi exception tak terduga saat proses komputasi (mode 1/2/3) | `[ERROR] Terjadi kesalahan tak terduga saat memproses data (...). Silakan periksa kembali input Anda dan coba lagi.` → program **tidak crash**, kembali ke menu |
 | User menekan `Ctrl+C` di mana pun saat program berjalan | Program keluar dengan rapi: `Program dihentikan paksa oleh pengguna (Ctrl+C). Sampai jumpa!` (tanpa traceback error) |
-| Error fatal tak terduga di luar semua penanganan di atas | `Terjadi kesalahan fatal pada program: ... Program akan ditutup.` (last-resort catch, tetap tanpa traceback Python mentah) |
+| Error fatal tak terduga di luar semua penanganan di atas | `Terjadi kesalahan fatal pada program: ... Program akan ditutup.` (tanpa traceback error) |
 
 ---
 
