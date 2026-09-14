@@ -5,46 +5,32 @@ mendekripsi, dan mencari kunci enkripsi, dengan dukungan **ukuran matriks kunci 
 bukan hanya 2x2. Semua operasi dilakukan dalam alfabet A–Z (26 huruf) sehingga seluruh
 perhitungan matriks berada dalam **modulo 26**.
 
-Program disediakan dalam **dua versi berkas** dengan logika yang identik:
-
-| Berkas | Deskripsi |
-|---|---|
-| `hill_cipher_berkomentar.py` | Versi lengkap dengan komentar & docstring penjelasan di setiap fungsi |
-| `hill_cipher_tanpa_komentar.py` | Versi bersih tanpa komentar, hanya kode program |
-
-Jalankan salah satu berkas dengan:
-```bash
-python3 hill_cipher_berkomentar.py
-# atau
-python3 hill_cipher_tanpa_komentar.py
-```
-
 ---
 
 ## 1. Alur Program (Overview)
 
 ```
                      ┌─────────────────────────┐
-                     │   run_hill_cipher_program │   <-- fungsi utama (main loop)
+                     │ run_hill_cipher_program │   <-- fungsi utama (main loop)
                      └────────────┬────────────┘
                                   │
                  ┌────────────────┴────────────────┐
-                 │        display_menu()            │  tampilkan menu 1-4
-                 │        input_menu_choice()       │  ambil & validasi pilihan
+                 │       display_menu()            │  tampilkan menu 1-4
+                 │       input_menu_choice()       │  ambil & validasi pilihan
                  └────────────────┬────────────────┘
                                   │
         ┌─────────────────────────┼─────────────────────────┐
-        │                         │                          │
-        ▼                         ▼                          ▼
+        │                         │                         │
+        ▼                         ▼                         ▼
   Mode 1: Enkripsi         Mode 2: Dekripsi          Mode 3: Cari Kunci
-        │                         │                          │
-        ▼                         ▼                          ▼
+        │                         │                         │
+        ▼                         ▼                         ▼
  get_all_inputs('1')      get_all_inputs('2')        get_all_inputs('3')
-        │                         │                          │
-        ▼                         ▼                          ▼
+        │                         │                         │
+        ▼                         ▼                         ▼
  process_all('1', data)   process_all('2', data)     process_all('3', data)
-        │                         │                          │
-        ▼                         ▼                          ▼
+        │                         │                         │
+        ▼                         ▼                         ▼
    show_output('1', ...)   show_output('2', ...)      show_output('3', ...)
                                   │
                                   ▼
@@ -60,20 +46,19 @@ apakah ingin melakukan operasi lain.
 ### Struktur Modular
 
 Sesuai prinsip modular, fungsi-fungsi dikelompokkan menjadi 3 kategori besar,
-masing-masing memiliki satu **fungsi "all-in-one"** yang memanggil fungsi-fungsi
+masing-masing memiliki satu **fungsi pengatur** yang memanggil fungsi-fungsi
 kecil di dalamnya:
 
-1. **INPUT** → semua fungsi `input_*()` dipanggil oleh satu fungsi pemersatu:
+1. **INPUT** → semua fungsi `input_*()` dipanggil oleh satu fungsi pengatur:
    **`get_all_inputs(mode)`**
-2. **PROSES** → semua fungsi `process_*()` dipanggil oleh satu fungsi pemersatu:
+2. **PROSES** → semua fungsi `process_*()` dipanggil oleh satu fungsi pengatur:
    **`process_all(mode, data)`**
-3. **OUTPUT** → semua fungsi `display_*()` dipanggil oleh satu fungsi pemersatu:
+3. **OUTPUT** → semua fungsi `display_*()` dipanggil oleh satu fungsi pengatur:
    **`show_output(mode, result_data)`**
 
 Fungsi matematika inti (determinan, invers matriks mod, perkalian matriks, dll)
 dipisah tersendiri karena sifatnya murni komputasi dan dipakai bersama oleh
-semua mode (encrypt/decrypt/cari kunci) — tidak cocok digabung ke dalam
-kelompok input/proses/output di atas.
+semua mode (encrypt/decrypt/cari kunci)
 
 ---
 
@@ -145,11 +130,6 @@ Tersedia dua metode:
 
 ## 4. Daftar Error Handling
 
-Semua pesan error/peringatan ditampilkan dalam **Bahasa Indonesia** yang jelas dan
-memberi tahu user tindakan yang harus dilakukan (bukan pesan error sistem/traceback
-Python). Program **tidak pernah crash** akibat input yang salah — user selalu
-diminta memasukkan ulang datanya.
-
 ### a. Validasi Menu & Pilihan
 | Situasi | Pesan / Perilaku |
 |---|---|
@@ -199,7 +179,7 @@ diminta memasukkan ulang datanya.
 |---|---|
 | Terjadi exception tak terduga saat proses komputasi (mode 1/2/3) | `[ERROR] Terjadi kesalahan tak terduga saat memproses data (...). Silakan periksa kembali input Anda dan coba lagi.` → program **tidak crash**, kembali ke menu |
 | User menekan `Ctrl+C` di mana pun saat program berjalan | Program keluar dengan rapi: `Program dihentikan paksa oleh pengguna (Ctrl+C). Sampai jumpa!` (tanpa traceback error) |
-| Error fatal tak terduga di luar semua penanganan di atas | `Terjadi kesalahan fatal pada program: ... Program akan ditutup. Mohon laporkan masalah ini jika terus terjadi.` (last-resort catch, tetap tanpa traceback Python mentah) |
+| Error fatal tak terduga di luar semua penanganan di atas | `Terjadi kesalahan fatal pada program: ... Program akan ditutup.` (last-resort catch, tetap tanpa traceback Python mentah) |
 
 ---
 
@@ -230,9 +210,9 @@ Screenshoot running program:
 ![](images/3-2_magang.png)
 ![](images/3-2_malamini.png)
 ![](images/3-2_python.png)
-![](images/menu4.png)
-
-Error Handling:
 ![](images/3-1_malamini.png)
 ![](images/3-1_magang.png)
+![](images/menu4.png)
+
+Contoh Error Handling:
 ![](images/error_handling_inputan.png)

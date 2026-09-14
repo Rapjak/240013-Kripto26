@@ -462,5 +462,5 @@ if __name__ == "__main__":
         sys.exit(0)
     except Exception as e:
         print(f"\n\nTerjadi kesalahan fatal pada program: {e}")
-        print("Program akan ditutup. Mohon laporkan masalah ini jika terus terjadi.")
+        print("Program akan ditutup.")
         sys.exit(1)
